@@ -4,12 +4,11 @@ export default function Contact(): React.ReactNode {
   return (
     <section
       id="contact"
-      className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 px-4 py-20 text-white sm:py-28"
+      className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 px-4 py-14 text-white sm:py-20"
     >
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="mb-4 text-3xl font-bold">Contact</h2>
-        <div className="mx-auto mb-8 h-1 w-12 rounded-full bg-blue-500" />
-        <p className="mb-10 text-lg text-slate-400">
+        <h2 className="mb-8 text-2xl font-bold tracking-tight">Contact</h2>
+        <p className="mb-8 text-slate-400">
           GitHubからお気軽にご連絡ください。
         </p>
         <a

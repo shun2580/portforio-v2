@@ -1,39 +1,38 @@
 import { skillsData } from '@/data/skillsData';
 
 const categoryColors = [
-  'bg-blue-500',
-  'bg-emerald-500',
-  'bg-orange-500',
+  { bar: 'bg-blue-500', badge: 'bg-blue-50 text-blue-700 ring-blue-200' },
+  { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
+  { bar: 'bg-orange-500', badge: 'bg-orange-50 text-orange-700 ring-orange-200' },
 ];
 
 export default function Skills(): React.ReactNode {
   return (
-    <section id="skills" className="bg-slate-50 px-4 py-20 sm:py-28">
+    <section id="skills" className="bg-slate-50 px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-3xl">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-slate-900">Skills</h2>
-          <div className="mt-2 h-1 w-12 rounded-full bg-blue-500" />
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {skillsData.map((category, idx) => (
-            <div
-              key={idx}
-              className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-slate-200/60"
-            >
-              <div className={`mb-4 h-1 w-8 rounded-full ${categoryColors[idx % categoryColors.length]}`} />
-              <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
-                {category.category}
-              </h3>
-              <ul className="space-y-2.5">
-                {category.skills.map((skill, skillIdx) => (
-                  <li key={skillIdx} className="flex items-center gap-2 text-sm text-slate-700">
-                    <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${categoryColors[idx % categoryColors.length]}`} />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <h2 className="mb-10 text-2xl font-bold tracking-tight text-slate-900">Skills</h2>
+        <div className="grid gap-5 md:grid-cols-3">
+          {skillsData.map((category, idx) => {
+            const color = categoryColors[idx % categoryColors.length];
+            return (
+              <div key={idx} className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60">
+                <div className={`mb-3 h-0.5 w-8 rounded-full ${color.bar}`} />
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">
+                  {category.category}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIdx) => (
+                    <span
+                      key={skillIdx}
+                      className={`rounded-md px-2.5 py-1 text-xs font-medium ring-1 ${color.badge}`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

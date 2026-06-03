@@ -2,32 +2,29 @@ import { projectsData } from '@/data/projectsData';
 
 export default function Projects(): React.ReactNode {
   return (
-    <section id="projects" className="bg-slate-50 px-4 py-20 sm:py-28">
+    <section id="projects" className="bg-white px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-slate-900">Projects</h2>
-          <div className="mt-2 h-1 w-12 rounded-full bg-blue-500" />
-        </div>
-        <div className="grid gap-8 md:grid-cols-2">
+        <h2 className="mb-10 text-2xl font-bold tracking-tight text-slate-900">Projects</h2>
+        <div className="grid gap-6 md:grid-cols-2">
           {projectsData.map((project, idx) => (
             <article
               key={idx}
-              className="flex flex-col overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200/60 transition hover:shadow-md"
+              className="flex flex-col overflow-hidden rounded-xl bg-slate-50 ring-1 ring-slate-200/60 transition hover:shadow-md"
             >
-              <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500" />
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="mb-2 text-xl font-bold text-slate-900">{project.title}</h3>
-                <p className="mb-5 text-sm leading-relaxed text-slate-500">{project.overview}</p>
-                <div className="mb-5 flex-1 space-y-3 text-sm">
+              <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500" />
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="mb-1.5 text-base font-bold text-slate-900">{project.title}</h3>
+                <p className="mb-4 text-sm leading-relaxed text-slate-500">{project.overview}</p>
+                <div className="mb-4 flex-1 space-y-2.5 text-sm">
                   <LabeledSection label="課題" color="red">{project.problem}</LabeledSection>
                   <LabeledSection label="施策" color="blue">{project.solution}</LabeledSection>
                   <LabeledSection label="成果" color="green">{project.result}</LabeledSection>
                 </div>
-                <div className="mb-4 flex flex-wrap gap-1.5">
+                <div className="mb-3 flex flex-wrap gap-1.5">
                   {project.tags.map((tag, tagIdx) => (
                     <span
                       key={tagIdx}
-                      className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600"
+                      className="rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200"
                     >
                       {tag}
                     </span>
@@ -68,9 +65,7 @@ function LabeledSection({
   };
   return (
     <div className="leading-relaxed text-slate-700">
-      <span
-        className={`mr-2 inline-block rounded border px-1.5 py-0.5 text-xs font-bold ${colorMap[color]}`}
-      >
+      <span className={`mr-1.5 inline-block rounded border px-1.5 py-0.5 text-xs font-bold ${colorMap[color]}`}>
         {label}
       </span>
       {children}
