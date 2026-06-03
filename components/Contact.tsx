@@ -1,26 +1,26 @@
 import { contactData } from '@/data/contactData';
+import FadeInSection from './FadeInSection';
 
 export default function Contact(): React.ReactNode {
   return (
-    <section
-      id="contact"
-      className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 px-4 py-14 text-white sm:py-20"
-    >
-      <div className="mx-auto max-w-3xl text-center">
-        <h2 className="mb-8 text-2xl font-bold tracking-tight">Contact</h2>
-        <p className="mb-8 text-slate-400">
-          GitHubからお気軽にご連絡ください。
-        </p>
-        <a
-          href={contactData.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-8 py-3 font-semibold backdrop-blur-sm transition hover:bg-white/20"
-        >
-          <GitHubIcon />
-          GitHub Profile
-        </a>
-      </div>
+    <section id="contact" className="bg-[#0F172A] px-4 py-14 sm:py-20">
+      <FadeInSection>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-10 text-2xl font-bold tracking-tight text-[#F1F5F9]">Contact</h2>
+          <p className="mb-8 text-[#94A3B8]">
+            GitHubからお気軽にご連絡ください。
+          </p>
+          <a
+            href={contactData.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+          >
+            <GitHubIcon />
+            GitHub Profile
+          </a>
+        </div>
+      </FadeInSection>
     </section>
   );
 }

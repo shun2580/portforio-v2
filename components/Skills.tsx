@@ -1,40 +1,59 @@
+import {
+  SiPhp, SiLaravel, SiNextdotjs, SiVuedotjs,
+  SiDocker, SiLinux, SiMysql, SiGitlab,
+} from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
 import { skillsData } from '@/data/skillsData';
+import FadeInSection from './FadeInSection';
 
-const categoryColors = [
-  { bar: 'bg-blue-500', badge: 'bg-blue-50 text-blue-700 ring-blue-200' },
-  { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
-  { bar: 'bg-orange-500', badge: 'bg-orange-50 text-orange-700 ring-orange-200' },
-];
+const iconMap: Record<string, IconType> = {
+  'PHP':        SiPhp,
+  'Laravel':    SiLaravel,
+  'Next.js':    SiNextdotjs,
+  'Vue.js':     SiVuedotjs,
+  'AWS':        FaAws,
+  'Docker':     SiDocker,
+  'Linux':      SiLinux,
+  'MySQL':      SiMysql,
+  'GitLab CI':  SiGitlab,
+  'GitLab':     SiGitlab,
+};
 
 export default function Skills(): React.ReactNode {
   return (
-    <section id="skills" className="bg-slate-50 px-4 py-14 sm:py-20">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="mb-10 text-2xl font-bold tracking-tight text-slate-900">Skills</h2>
-        <div className="grid gap-5 md:grid-cols-3">
-          {skillsData.map((category, idx) => {
-            const color = categoryColors[idx % categoryColors.length];
-            return (
-              <div key={idx} className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200/60">
-                <div className={`mb-3 h-0.5 w-8 rounded-full ${color.bar}`} />
-                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">
+    <section id="skills" className="bg-[#1E293B] px-4 py-14 sm:py-20">
+      <FadeInSection>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-10 text-2xl font-bold tracking-tight text-[#F1F5F9]">Skills</h2>
+          <div className="grid gap-5 md:grid-cols-3">
+            {skillsData.map((category, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl border border-[#334155] bg-[#1E293B] p-5"
+              >
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
                   {category.category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIdx) => (
-                    <span
-                      key={skillIdx}
-                      className={`rounded-md px-2.5 py-1 text-xs font-medium ring-1 ${color.badge}`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  {category.skills.map((skill, skillIdx) => {
+                    const Icon = iconMap[skill];
+                    return (
+                      <span
+                        key={skillIdx}
+                        className="inline-flex items-center gap-1.5 rounded-md border border-[#334155] bg-[#0F172A] px-2.5 py-1.5 text-xs font-medium text-[#94A3B8]"
+                      >
+                        {Icon && <Icon className="h-3.5 w-3.5 text-[#3B82F6]" />}
+                        {skill}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
+      </FadeInSection>
     </section>
   );
 }

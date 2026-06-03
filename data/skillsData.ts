@@ -3,29 +3,14 @@ import type { SkillCategory } from './types';
 export const skillsData: SkillCategory[] = [
   {
     category: 'Languages & Frameworks',
-    skills: [
-      'PHP / Laravel',
-      'HTML / CSS / JavaScript',
-      'Next.js (App Router)',
-      'Vue.js',
-    ],
+    skills: ['PHP', 'Laravel', 'Next.js', 'Vue.js', 'HTML / CSS / JS'],
   },
   {
     category: 'Infrastructure & Cloud',
-    skills: [
-      'AWS (EC2 / ECS / RDS / Redis)',
-      'Docker / DevContainer',
-      'Linux',
-      'MySQL (Amazon RDS)',
-      'GitLab CI',
-    ],
+    skills: ['AWS', 'Docker', 'Linux', 'MySQL', 'GitLab CI'],
   },
   {
     category: 'Dev Tools & Others',
-    skills: [
-      'GitLab',
-      'VSCode / GitHub Copilot / Claude Code',
-      'Datadog / Zabbix / Grafana',
-    ],
+    skills: ['GitLab', 'VSCode', 'GitHub Copilot', 'Datadog', 'Grafana'],
   },
 ];
