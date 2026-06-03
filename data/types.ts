@@ -33,5 +33,4 @@ export interface CareerEntry {
 
 export interface ContactContent {
   github: string;
-  email: string;
 }

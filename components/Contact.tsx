@@ -6,7 +6,7 @@ export default function Contact(): React.ReactNode {
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="mb-8 text-3xl font-bold text-slate-900">Contact</h2>
         <p className="mb-8 text-lg text-slate-600">
-          Let&apos;s connect and build something great together!
+          GitHubからお気軽にご連絡ください。
         </p>
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           <a
@@ -16,12 +16,6 @@ export default function Contact(): React.ReactNode {
             className="inline-block rounded-lg bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800"
           >
             GitHub
-          </a>
-          <a
-            href={`mailto:${contactData.email}`}
-            className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-          >
-            Email
           </a>
         </div>
       </div>
