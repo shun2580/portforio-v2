@@ -1,13 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #0F172A;
+  --color-surface: #1E293B;
+  --color-border: #334155;
+  --color-muted: #94A3B8;
+  --color-fg: #F1F5F9;
+  --color-accent: #3B82F6;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3 {
+    letter-spacing: var(--tracking-tight);
+  }
+}
+
 body {
-  background: #0F172A;
-  color: #F1F5F9;
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 }
 
 /* Hero grid pattern */
@@ -39,3 +56,18 @@ body {
 .anim-delay-2 { animation-delay: 0.25s; }
 .anim-delay-3 { animation-delay: 0.4s; }
 .anim-delay-4 { animation-delay: 0.55s; }
+
+/* Respect reduced-motion: show content immediately, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .anim-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

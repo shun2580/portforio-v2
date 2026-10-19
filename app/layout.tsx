@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,15 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const notoSansJP = Noto_Sans_JP({
+  weight: ["400", "500", "700"],
+  variable: "--font-noto-sans-jp",
+});
+
 export const metadata: Metadata = {
   title: '西川 駿 | Backend Engineer',
   description:
-    'PHP / Laravel / AWS を軸としたバックエンドエンジニア。設計からインフラ構築まで一貫して担当。',
+    'PHP / Laravel / Go / AWS を軸としたバックエンドエンジニア。設計からインフラ構築まで一貫して担当。',
 };
 
 export default function RootLayout({
@@ -19,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${inter.variable} h-full antialiased`}>
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

@@ -5,6 +5,7 @@ import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Career from '@/components/Career';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Home(): React.ReactNode {
   return (
@@ -16,6 +17,7 @@ export default function Home(): React.ReactNode {
       <Projects />
       <Career />
       <Contact />
+      <Footer />
     </>
   );
 }
