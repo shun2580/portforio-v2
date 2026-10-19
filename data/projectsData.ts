@@ -94,26 +94,24 @@ export const projectsData: Project[] = [
   {
     kind: 'personal',
     title: 'remoteStorage CLI「rscli」',
-    // TODO(shun): 期間を記入(空のままなら非表示)
-    period: '',
+    period: '2026年6月',
     overview:
-      'remoteStorage プロトコル（draft-dejong-remotestorage-22）を操作する Go 製 CLI ツール。サーバーへの接続・認証、ファイル操作、ローカルフォルダとの同期に対応。Claude による AI 支援を受けて開発。',
+      'remoteStorage プロトコル（draft-dejong-remotestorage-22）を操作する Go 製 CLI ツール。CoDD（整合性駆動開発）の使い方を確かめるため、要件定義書を自分で書き（CoDD からの質問への回答や文章の整理には Claude を使用）、設計から実装までを CoDD とマルチエージェント環境で生成した。',
     problem:
-      'remoteStorage サーバー上のファイルをターミナルから一覧・転送し、ローカルのフォルダと同期できるツールが欲しかった。',
+      'CoDD で要件定義から実装までがどう進むかを、実際に動くものを作って確かめたかった。題材には、remoteStorage 上のファイルをターミナルから操作・同期できるツールを選んだ。',
     solution:
-      'WebFinger によるサーバー自動検出と OAuth2 + PKCE 認証を実装。push / pull でローカル→リモート、リモート→ローカルの双方向に同期でき、ETag と更新日時で変更を検出してコンフリクト時はスキップする。指数バックオフのリトライ、並列転送、同時実行を防ぐロックファイルも実装。GitHub Actions で go vet・ビルド・5 プラットフォームのクロスコンパイル確認を自動化し、タグを push すると各 OS 向けバイナリとチェックサムを GitHub Releases に公開する。',
+      '生成された CLI は、WebFinger によるサーバー自動検出と OAuth2 + PKCE 認証に対応。push / pull でローカル→リモート、リモート→ローカルの双方向に同期でき、ETag と更新日時で変更を検出してコンフリクト時はスキップする。指数バックオフのリトライ、並列転送、同時実行を防ぐロックファイルも実装。GitHub Actions で go vet・ビルド・5 プラットフォームのクロスコンパイル確認を自動化し、タグを push すると各 OS 向けバイナリとチェックサムを GitHub Releases に公開する。',
     result:
-      'v0.1.0 をリリース。Linux / macOS / Windows 向けのバイナリを配布でき、自己署名 HTTPS のテストサーバーを Docker で同梱して、実サーバーなしで動作確認できるようにした。',
-    tags: ['Go', 'OAuth2 / PKCE', 'GitHub Actions', 'Docker'],
+      'v0.1.0 として Linux / macOS / Windows 向けバイナリを公開。CoDD が要件の不足を指摘し、生成と並行して要件を詰めていく流れを確認できた。生成されたコードの読解は、Go 学習の次の段階で行う。',
+    tags: ['Go', 'CoDD', 'OAuth2 / PKCE', 'GitHub Actions', 'Docker'],
     githubUrl: 'https://github.com/shun2580/rstools',
   },
   {
     kind: 'personal',
     title: 'Chrome 拡張「Inline Paste for Claude」',
-    // TODO(shun): 期間を記入(空のままなら非表示)
-    period: '',
+    period: '2026年8月',
     overview:
-      'claude.ai で長文を貼り付けると添付ファイルに自動変換される挙動を回避し、編集できるテキストのまま入力欄に挿入する Chrome 拡張。個人で開発し、Chrome Web Store で公開。',
+      'claude.ai で長文を貼り付けると添付ファイルに自動変換される挙動を回避し、編集できるテキストのまま入力欄に挿入する Chrome 拡張。仕様と要件を自分でまとめ、Claude による AI 支援を受けて開発し、Chrome Web Store で公開。',
     problem:
       'claude.ai では長文のペーストが自動で添付ファイルに変換され、テキストのまま入力欄に残して編集する選択肢がなかった。',
     solution:
