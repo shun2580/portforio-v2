@@ -2,55 +2,142 @@ import type { Project } from './types';
 
 export const projectsData: Project[] = [
   {
-    title: 'ふるさと納税サイトの ECS＋Laravel リアーキテクチャ',
+    kind: 'work',
+    title: 'ふるさと納税ポータルサイトの ECS＋Laravel リアーキテクチャ',
+    period: '2025年10月〜2026年7月',
     overview:
-      'EC2＋独自フレームワーク構成の既存システムを ECS＋Laravel へ全面移行。メインエンジニアとして発案から推進まで一貫して担当。',
+      'EC2＋自社フレームワーク構成のポータルサイトを ECS＋Laravel へ全面移行。7名体制（アプリケーション側3名）の一員として、移行の実装と性能改善を担当。',
     problem:
-      '長年稼働していた EC2＋自社フレームワーク構成の保守性が低下し、機能追加やモダンな開発プロセスへの移行が困難になっていた。',
+      '自社フレームワークの制約でテストコードを書けず、保守性の低下とモダンな開発プロセスへの移行の難しさが課題だった。',
     solution:
-      'ECS＋Laravel 構成への移行を主担当として発案・設計。拡張性を考慮した設計方針を策定し、MR ベースのコードレビューフローも整備。技術的意思決定を一貫して担当。',
+      '自社フレームワークから Laravel への移行（テストコードを含む）と、セッションの Redis 化を担当。同期実行ではタイムアウトすると見込んだ画像保存処理に Redis ジョブキューを、Bot の過剰アクセスによる DB 負荷にマスターデータのキャッシュを、それぞれ提案・実装した。性能ログにクエリ数・DB I/O 比率・実行時間の計測を追加し、レビュー待ちの滞留に対しては一次レビュー担当を申し出て二段レビュー体制に変えた。',
     result:
-      'システムの信頼性と運用効率を大幅向上。モダンなコンテナ環境への移行基盤を確立し、以降の機能開発スピードを改善。',
-    tags: ['PHP', 'Laravel', 'AWS ECS', 'Docker'],
+      '2026年6月に本番リリース。約250万件の本番相当データで20〜30秒かかっていた検索を、計測で %LIKE% の全件走査が原因と特定し、FULLTEXT インデックス（ngram パーサ）の導入で数秒台に短縮。Elasticsearch は費用とリリース遅延のリスクから見送り、追加費用なしで解決した。同じ計測から、EagerLoad の宣言漏れによる N+1 も特定・修正した。',
+    tags: ['PHP', 'Laravel', 'Redis', 'MySQL', 'AWS ECS', 'Docker'],
     githubUrl: '#',
   },
   {
-    title: 'シリアルコード型ふるさと納税サイト・CMS 新規開発',
+    kind: 'work',
+    title: '他社ふるさと納税サービスとの OEM 連携機能の新規開発',
+    period: '2023年5月〜2023年11月',
     overview:
-      'Next.js（App Router）＋Laravel＋Nginx の BFF 構成でサイトと CMS をゼロから設計・構築。2 名体制で技術リードを担当。',
+      '他社サービスの返礼品・自治体情報をポータルサイトに取り込む連携機能を、入社直後から設計・実装・テスト・クライアントとの仕様調整まで、ほぼ1人で担当。',
     problem:
-      'フロントとバックエンドが密結合にならないモダンな技術スタックの選定と、インフラ構成をゼロベースで策定する必要があった。',
+      '掲載数を大きく増やす必要があったが、着手の1か月後に在籍していたエンジニアが退職し、実質1人で進める状況だった。',
     solution:
-      'BFF アーキテクチャを自ら設計し、ECS 構成のインフラ策定・Dockerfile 作成・GitLab CI によるデプロイ自動化まで一貫して構築。フロントからインフラまで技術リードとして牽引。',
+      '連携先の差分 CSV を30分ごとに取り込む定期バッチを実装。1,000件単位で処理し、失敗した単位だけを1件ずつの処理に切り替えて、不備のある行のみをスキップする方式を発案した。取得失敗・処理超過・ファイル残留は通知し、残留時は次回の処理を止めて手動確認を求める形にした。返礼品の増加で一覧表示が約10秒かかるようになったため、インデックス追加では効果が出ないことを確かめたうえで、一覧表示用のテーブルを差分同期する方式を設計した。',
     result:
-      '期間内にリリースを安定して完遂。インフラからフロントエンドまで見通しの良い、変化に強い開発基盤を確立。',
-    tags: ['Next.js', 'Laravel', 'AWS ECS', 'GitLab CI', 'Docker'],
+      '入社半年でリリースし、掲載自治体数は約5倍、掲載返礼品数は約3倍（数百万件規模）に拡大。返礼品一覧の表示時間を約10秒から3〜4秒に短縮した。',
+    tags: ['PHP', 'MySQL', 'バッチ処理', 'AWS S3'],
     githubUrl: '#',
   },
   {
-    title: '開発環境のコンテナ化・標準化と DX 向上',
+    kind: 'work',
+    title: 'ふるさと納税サイトの新規開発（Next.js＋Laravel の BFF 構成）',
+    period: '2025年4月〜2025年9月',
     overview:
-      'DevContainer 導入・GitLab CI 整備・ポート管理ツール展開により、チーム全体の開発環境を統一。属人性を排除した仕組みを構築。',
+      '新規のふるさと納税サイトと管理 CMS を、PM との2名体制で立ち上げ。フロントエンド実装の多くと、インフラ・開発環境を担当。',
     problem:
-      'ローカル環境差異による Pint フォーマット不整合やポート競合問題が開発のボトルネックとなっていた。',
+      '新規プロダクトで、フロントとバックエンドが密結合にならない技術スタックとインフラ構成を、ゼロから決める必要があった。',
     solution:
-      'DevContainer で設定を完全統一し、ポート競合防止ツール「tug」を導入。GitLab CI に Pint・PHPStan を追加し、品質チェックを自動化。',
+      'PM の提案した BFF 構成（Next.js App Router＋Laravel）のもと、返礼品一覧・詳細、会員登録・ログイン、寄附申込、マイページなどを実装。複数画面に分けた寄附申込フローでは、Zustand で到達済みのステップを管理し、手順の飛ばしを防いだ。認証は Laravel Sanctum のアクセストークンと独自のリフレッシュトークンを組み合わせ、どちらも HttpOnly Cookie に保存する形で実装。画像は EFS のコスト課題に対し、CloudFront から S3 に接続する構成をインフラ担当と検討して採用した。バッチ基盤は Bref＋Lambda を検証したうえで、実行時間の上限がない ECS スケジュールタスクを選んだ。',
     result:
-      '属人性を排除し、新規メンバー参画時の環境構築工数を大幅削減。コード品質が CI 段階で恒久的に担保される仕組みを確立。',
-    tags: ['DevContainer', 'GitLab CI', 'PHP', 'Docker'],
+      '期間内にリリース。フロントとバックエンドを分離したことで、不具合の修正時に片方だけを対応できるようになり、反映時のヒューマンエラーが減った。S3＋CloudFront の構成は、後のリアーキテクチャでの静的配信にもつながった。',
+    tags: ['Next.js', 'TypeScript', 'Laravel', 'AWS ECS', 'S3 / CloudFront', 'GitLab CI'],
     githubUrl: '#',
   },
   {
+    kind: 'work',
+    title: '開発環境の標準化と CI による品質チェック',
+    period: '2025年10月〜2026年7月',
+    overview:
+      'リアーキテクチャの7名並行開発で表面化した環境差異を、環境そのものを配布する方針で解消。提案から構築・定着までを担当。',
+    problem:
+      'ローカル環境の差異による Pint の設定不整合やポート競合が開発のボトルネックになっており、個別に直しても人が増えるたびに再発していた。',
+    solution:
+      'DevContainer を提案・構築し、設定をコンテナ内に統一。ポート競合防止ツール「tug」を導入し、勉強会で全メンバーに定着させた。GitLab CI に Pint と PHPStan（レベル4）のジョブを追加し、警告があればマージできない形にした。',
+    result:
+      '新規メンバーの環境構築時間を、約半日から2〜3時間程度（目安）に短縮。フォーマットと静的解析のチェックを、個人の注意力ではなく CI で担保する形にした。',
+    tags: ['DevContainer', 'Docker', 'GitLab CI', 'PHPStan'],
+    githubUrl: '#',
+  },
+  {
+    kind: 'work',
+    title: '連携機能改修の仕様設計と、BDD を起点にした AI 活用開発',
+    period: '2026年9月〜（進行中）',
+    overview:
+      '返礼品連携機能の改修で、CMS 側の事前取り込みと定期バッチ連携の仕様定義を担当（3名体制）。チームで試行している BDD を起点に、AI に任せる範囲を整理しながら進めている。',
+    problem:
+      '取り込み失敗時の調査や修正をベンダーが担う形では、運用者は復旧を待つしかない。また要望がディレクター経由で伝わる中でズレが生じ、確認段階で手戻りになるケースがあった。',
+    solution:
+      'システムが自動で直せる障害は人に触らせず、人の判断が必要な失敗には CMS から再取り込みできる手段を用意。通知メールに対象 ID・失敗箇所・理由を載せ、運用者が対処を判断できるようにした。決定事項を GitHub Copilot で Gherkin 形式に変換し、自分でレビューして担当分の BDD を作成。AI への指摘を記録して振り返り、AI に任せられる範囲と人が判断すべき範囲を整理した。',
+    result:
+      '2026年10月時点で、担当分の仕様定義と BDD 作成を完了。実装は、仕様の決定とレビューを人が担い、Claude Code で進める方針。',
+    tags: ['Laravel', 'BDD (Gherkin)', 'GitHub Copilot', 'Claude Code'],
+    githubUrl: '#',
+  },
+  {
+    kind: 'personal',
+    title: '情報収集・通知ツール「go-harvester」',
+    period: '2026年6月〜2026年10月',
+    overview:
+      'Go を学ぶために作った常駐型の通知ツール。GitHub 通知と RSS を定期的に取得し、通知済みの項目を除いて ntfy に送る。学習目的のため、Claude にレクチャー役を頼み、解説・穴あきの手本・添削を受けながら自分でコードを書いた。',
+    problem:
+      'goroutine・channel・interface・テストといった Go の基本を、実際に使うものを作りながら身につけたかった。題材として、GitHub 通知や RSS を個別に確認する手間をなくすツールを選んだ。',
+    solution:
+      '取得・絞り込み・通知をインターフェースで分離し、各情報源の取得を goroutine で並列に実行して channel で結果を集める構成にした。time.Ticker で定期実行し、SIGINT / SIGTERM を受けたら実行中の見回りを終えてから止まるようにした。ntfy 通知・RSS 取得・重複除外のテストは httptest などで書いた。',
+    result:
+      '並列取得・重複除外・通知・定期実行・設定ファイルの読み込み・終了時の後始末までを実装して完成し、tmux で常駐させる手順も README にまとめた。次は、書いたコードを読み直して設計判断（channel で集約した理由、終了時の止まり方など）を自分の言葉で説明できるようにすることと、既読記録の永続化・GitHub 取得処理のテストに取り組む。',
+    tags: ['Go', 'goroutine / channel', 'ntfy'],
+    githubUrl: 'https://github.com/shun2580/go-harvester',
+  },
+  {
+    kind: 'personal',
+    title: 'remoteStorage CLI「rscli」',
+    // TODO(shun): 期間を記入(空のままなら非表示)
+    period: '',
+    overview:
+      'remoteStorage プロトコル（draft-dejong-remotestorage-22）を操作する Go 製 CLI ツール。サーバーへの接続・認証、ファイル操作、ローカルフォルダとの同期に対応。Claude による AI 支援を受けて開発。',
+    problem:
+      'remoteStorage サーバー上のファイルをターミナルから一覧・転送し、ローカルのフォルダと同期できるツールが欲しかった。',
+    solution:
+      'WebFinger によるサーバー自動検出と OAuth2 + PKCE 認証を実装。push / pull でローカル→リモート、リモート→ローカルの双方向に同期でき、ETag と更新日時で変更を検出してコンフリクト時はスキップする。指数バックオフのリトライ、並列転送、同時実行を防ぐロックファイルも実装。GitHub Actions で go vet・ビルド・5 プラットフォームのクロスコンパイル確認を自動化し、タグを push すると各 OS 向けバイナリとチェックサムを GitHub Releases に公開する。',
+    result:
+      'v0.1.0 をリリース。Linux / macOS / Windows 向けのバイナリを配布でき、自己署名 HTTPS のテストサーバーを Docker で同梱して、実サーバーなしで動作確認できるようにした。',
+    tags: ['Go', 'OAuth2 / PKCE', 'GitHub Actions', 'Docker'],
+    githubUrl: 'https://github.com/shun2580/rstools',
+  },
+  {
+    kind: 'personal',
+    title: 'Chrome 拡張「Inline Paste for Claude」',
+    // TODO(shun): 期間を記入(空のままなら非表示)
+    period: '',
+    overview:
+      'claude.ai で長文を貼り付けると添付ファイルに自動変換される挙動を回避し、編集できるテキストのまま入力欄に挿入する Chrome 拡張。個人で開発し、Chrome Web Store で公開。',
+    problem:
+      'claude.ai では長文のペーストが自動で添付ファイルに変換され、テキストのまま入力欄に残して編集する選択肢がなかった。',
+    solution:
+      'window の capture フェーズで paste イベントを先取りし、サイト側の変換処理より前に介入。行ごとに段落ノードを組み立て、ページ上の TipTap エディタの insertContent で挿入する。挿入方式は execCommand などと実測で比較して決定。拡張機能の権限は要求せず外部通信も行わない。UI 変更でエディタを検出できない場合は何もせず、サイト本来の動作に戻るフェイルセーフ設計。',
+    result:
+      'Chrome Web Store で公開。実測で 10 万字を約 0.1 秒・文字の欠落なしで挿入できる（execCommand 方式では約 17.7 秒かかり、3,928 字が欠落した）。',
+    tags: ['JavaScript', 'Chrome Extension', 'Manifest V3', 'TipTap'],
+    githubUrl: 'https://github.com/shun2580/inline-paste-for-claude',
+    storeUrl:
+      'https://chromewebstore.google.com/detail/paste-guard-for-claude/pfdppngcicgihbapegahkcoajmdepiad',
+  },
+  {
+    kind: 'personal',
     title: 'マルチエージェント AI 開発環境',
+    period: '2026年5月〜',
     overview:
-      '将軍・家老・足軽・軍師の役割分担による階層型マルチエージェントシステム。イベント駆動方式のタスク管理と YAML ベースの永続化で、複数 AI エージェントが自律的に協調動作する。',
+      'OSS の multi-agent-shogun（将軍・家老・軍師・足軽の階層型マルチエージェント）をフォークし、自分の開発環境向けにカスタマイズして日常的に運用。現在は 10 体すべてを Claude Code で稼働させている。',
     problem:
-      'ローカル LLM は複数ステップの指示に追従できず、エージェントが無限ループに陥り手動リセットが必要だった。Claude Pro の 5 時間レート制限が開発の重要な局面で中断を引き起こし、継続的な自律実行を妨げていた。',
+      'ローカル LLM を混ぜた旧構成では、エージェントが指示を正しく解釈できずに同じ処理をループし、手動でリセットする必要があった。また Claude Pro の 5 時間レート制限で作業が途中で止まっていた。',
     solution:
-      '4 階層エージェント構成を CoDD と統合し、自然言語の指示だけで要件定義→設計→実装→品質チェックまでを自動実行。Claude Sonnet / Gemini 2.5 Flash / Ollama のマルチモデルハイブリッド構成で 7 エージェントを同時稼働。inotifywait によるイベント駆動方式でポーリングを廃止。',
+      'Claude Max プランに移行して全エージェントを Claude Code に統一（将軍 Opus／家老・軍師・足軽 5 体 Sonnet／軽作業用の足軽 2 体 Haiku）し、タスクの重さで振り分けるルールを明文化。通信のポーリングを inotifywait によるイベント駆動に変更し、起動前チェックや、作業中のエージェントを誤ってリセットしない監視処理を bats テスト付きで追加。CoDD 連携スキルで、自然言語の指示から要件定義→設計→実装→品質チェックまで流せるようにした。',
     result:
-      '月額固定コスト内で 3 社 AI プロバイダーにまたがる 7 エージェント同時稼働を実現。エージェント間通信の API コストはゼロ。コンテキスト枯渇や CLI 障害からの自動リカバリーで人手介入なしに自律運用が継続。',
-    tags: ['Claude Code', 'Multi-Agent', 'CoDD', 'Bash', 'Gemini CLI', 'Ollama'],
-    githubUrl: 'https://github.com/ZenkakuHiragana/multi-agent-shogun',
+      '月額固定のサブスクリプション内で 10 体を並行稼働。ローカル LLM 起因のループと手動リセットは構成変更によりなくなった。',
+    tags: ['Claude Code', 'Multi-Agent', 'CoDD', 'Bash', 'tmux'],
+    githubUrl: 'https://github.com/shun2580/multi-agent-shogun',
   },
 ];

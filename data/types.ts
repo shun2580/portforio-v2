@@ -1,5 +1,7 @@
 export interface HeroContent {
   name: string;
+  role: string;
+  headline: string;
   intro: string;
   githubUrl: string;
 }
@@ -15,13 +17,16 @@ export interface SkillCategory {
 }
 
 export interface Project {
+  kind: 'work' | 'personal';
   title: string;
+  period: string;
   overview: string;
   problem: string;
   solution: string;
   result: string;
   tags: string[];
   githubUrl: string;
+  storeUrl?: string;
 }
 
 export interface CareerEntry {
@@ -32,5 +37,7 @@ export interface CareerEntry {
 }
 
 export interface ContactContent {
+  email: string;
   github: string;
+  zenn: string;
 }
