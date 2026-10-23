@@ -25,6 +25,7 @@ export const skillsData: SkillCategory[] = [
       'GitHub Copilot',
       'BDD (Gherkin)',
       'PHPStan / Pint',
+      'Pest',
       'tmux',
       'Datadog / Zabbix / Grafana',
     ],
