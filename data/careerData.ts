@@ -2,11 +2,11 @@ import type { CareerEntry } from './types';
 
 export const careerData: CareerEntry[] = [
   {
-    company: 'ふるさと納税プラットフォームを展開する企業',
+    company: '自治体向けのふるさと納税管理システムを提供する企業',
     period: '2023年5月 〜 現在',
     role: 'バックエンドエンジニア',
     description:
-      'PHP / Laravel を主軸に、ふるさと納税ポータルサイトと管理 CMS の開発・保守を担当。入社直後に他社サービスとの OEM 連携機能をほぼ1人でリリースし、その後は ECS＋Laravel へのリアーキテクチャ、Next.js＋Laravel の BFF 構成での新規サイト開発、決済機能の追加や不正検知サービスの導入などを手がける。DevContainer による開発環境の標準化と、GitLab CI への Pint / PHPStan の導入を主導。',
+      'PHP / Laravel を主軸に、ふるさと納税ポータルサイトと管理 CMS の開発・保守を担当。入社直後に他社サービスとの OEM 連携機能をほぼ1人でリリースし、その後は ECS＋Laravel へのリアーキテクチャ、Next.js＋Laravel の BFF 構成での新規サイト開発、決済機能の追加や不正検知サービスの導入などを手がける。DevContainer による開発環境の標準化を主導し、GitLab CI の Pint / PHPStan ジョブを作成（全プロジェクトへの展開は上長）。',
   },
   {
     company: 'ITインフラ企業',
